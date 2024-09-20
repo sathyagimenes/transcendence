@@ -16,7 +16,7 @@ export class Navbar extends HTMLElement {
   renderNavbar() {
     const isAuthenticated = !!session.player;
     const navbarContent = `
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark border border-secondary rounded rounded-3">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark border border-secondary shadow rounded rounded-3">
                 <div class="container-lg">
                     <t-button to="${
                       isAuthenticated ? "/auth/" : "/"
@@ -30,7 +30,9 @@ export class Navbar extends HTMLElement {
                               isAuthenticated
                                 ? `
                                 <li class="nav-item">
-                                        <t-button to="${isAuthenticated ? "/auth/" : "/"}" id="chat-button" theme="dark" btn-class="nav-link px-3">Home</t-button>
+                                        <t-button to="${
+                                          isAuthenticated ? "/auth/" : "/"
+                                        }" id="chat-button" theme="dark" btn-class="nav-link px-3">Home</t-button>
                                 </li>
                                 <li class="nav-item">
                                         <t-button to="/auth/player/chat" id="chat-button" theme="dark" btn-class="nav-link px-3">Chat</t-button>

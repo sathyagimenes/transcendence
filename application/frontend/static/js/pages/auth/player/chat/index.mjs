@@ -26,7 +26,7 @@ export const Chat = () => {
         </form>
       </div>
 
-      <div class="border border-secondary p-2 my-3 rounded overflow-y-auto" style="height: 60vh">
+      <div class="border border-secondary p-2 mt-3 rounded overflow-y-auto" style="height: 60vh">
         <strong class="mb-2 d-block">Amigos</strong>
         <t-loading id="loading-players" loading="true">
           <ul id="players-list" class="list-group">

@@ -38,7 +38,7 @@ export class TChat extends HTMLElement {
   constructor() {
     super();
     this.container = new Component("div").class(
-      "border border-secondary p-2 rounded",
+      "border border-secondary p-2 rounded h-100",
     );
     this.container.element.innerHTML = `
       <t-conditional condition="false">

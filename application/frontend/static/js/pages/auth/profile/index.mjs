@@ -24,9 +24,9 @@ export const Profile = () => {
       <div class="d-flex flex-column">
           <form id="update-form">
             <div class="d-flex flex-wrap gap-1">
-            <t-input id="input-name" label="Nome"></t-input>
+            <t-input id="input-name" label="Nome" class="w-100"></t-input>
             <t-errors id="update-form-errors"></t-errors>
-            <t-button id="save-button" class="d-block mt-3" btn-class="w-100">Salvar</t-button>
+            <t-button id="save-button" class="d-block mt-3 w-100" btn-class="w-100">Salvar</t-button>
             </div>
             <div class="mt-3">
               <strong>Email:</strong>
