@@ -28,7 +28,7 @@ export const Registration = () => {
         <t-button id="register-button" class="d-block" btn-class="w-100" theme="info">Registrar</t-button>
       </form>
 
-      <p class="mt-5 d-flex gap-2 align-items-center">
+      <p class="mt-5 d-flex gap-2 align-items-center justify-content-center"> <!-- Modified line -->
         Já tem uma conta?
         <t-button to="/login" theme="outlineInfo">Entrar agora</t-button>
       </p>

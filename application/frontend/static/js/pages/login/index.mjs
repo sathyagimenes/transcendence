@@ -10,26 +10,28 @@ export const Login = () => {
   const page = new Component("div").class("container-lg mx-auto");
 
   page.element.innerHTML = `
-    <t-navbar></t-navbar>
-    <div class="mx-auto p-2 rounded rounded-3">
-      <div class="d-flex flex-column p-2 rounded">
-        <h1 class="text-center" data-bs-theme="secondary">Login</h1>
-      </div>
-      <div class="top-image mt-2">
-          <img src="/media/default/front/banner.jpg" alt="Banner" class="rounded rounded-5 w-50">
-      </div>
-      <form id="login-form" class="d-flex flex-column gap-3">
-          <t-input id="input-email" label="Email" type="email"></t-input>
-          <t-input id="input-password" label="Senha" type="password"></t-input>
+   <t-navbar></t-navbar>
+<div class="mx-auto p-2 rounded rounded-3">
+  <div class="d-flex flex-column rounded">
+    <h1 class="text-center" data-bs-theme="secondary">Login</h1>
+  </div>
+  <div class="top-image mt-2">
+    <img src="/media/default/front/banner.jpg" alt="Banner" class="rounded rounded-5 w-50">
+  </div>
+  <form id="login-form" class="container d-flex flex-column gap-3 mx-auto">
+    <t-input id="input-email" label="Email" type="email"></t-input>
+    <t-input id="input-password" label="Senha" type="password"></t-input>
 
-          <t-errors id="errors"></t-errors>
-          <t-button id="login-button" class="d-block" btn-class="w-100" theme="info">Entrar</t-button>
-      </form>
-      <p class="mt-5 d-flex align-items-center gap-2">
-          Não tem uma conta?
-          <t-button to="/register" theme="outlineInfo">Registre agora</t-button>
-      </p>
-    </div>
+    <t-errors id="errors"></t-errors>
+    <t-button id="login-button" class="d-block" btn-class="w-100" theme="info">Entrar</t-button>
+  </form>
+  
+  <p class="mt-5 d-flex gap-2 align-items-center justify-content-center">
+    Não tem uma conta?
+    <t-button to="/register" theme="outlineInfo">Registre agora</t-button>
+  </p>
+</div>
+
   `;
 
   let email = "";
