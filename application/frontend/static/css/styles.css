@@ -46,3 +46,9 @@
 	overflow: hidden;
 	aspect-ratio: 1 / 1;
 }
+
+@media (max-width: 650px) {
+	.chat-container {
+		flex-direction: column !important;
+	}
+}

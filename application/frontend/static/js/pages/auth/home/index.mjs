@@ -24,18 +24,18 @@ export const Home = () => {
         <img src="/media/default/front/banner.jpg" alt="Banner" class="rounded rounded-5 w-50">
     </div>
     <div class="d-flex flex-wrap row gap-2 p-2 mt-2 ">
-      <div class="col">
-        <t-button id="local-match-create-button" class="d-inline-block w-100 text-center" btn-class="w-100" theme="outlineInfo">Criar Partida Local</t-button>
+      <div class="col d-flex">
+        <t-button id="local-match-create-button" class="d-flex align-items-stretch w-100 text-center" btn-class="w-100" theme="outlineInfo">Criar Partida Local</t-button>
       </div>
-      <div class="col">
-        <t-button id="match-create-open-modal-button" class="d-inline-block w-100 text-center" btn-class="w-100" theme="outlineInfo">Criar Partida</t-button>
+      <div class="col d-flex">
+        <t-button id="match-create-open-modal-button" class=" d-flex align-items-stretch w-100 text-center" btn-class="w-100" theme="outlineInfo">Criar Partida</t-button>
       </div>
       <div class="w-100"></div>
-      <div class="col">
-        <t-button id="tournament-create-open-modal-button" class="d-inline-block w-100 text-center" btn-class="w-100" theme="outlineInfo">Criar Torneio</t-button>
+      <div class="col d-flex">
+        <t-button id="tournament-create-open-modal-button" class="d-flex align-items-stretch w-100 text-center" btn-class="w-100" theme="outlineInfo">Criar Torneio</t-button>
       </div>
-      <div class="col">
-        <t-button id="find-match-button" class="d-inline-block w-100 text-center" btn-class="w-100" theme="outlineInfo">Encontrar Partida</t-button>
+      <div class="col d-flex">
+        <t-button id="find-match-button" class=" d-flex align-items-stretch w-100 text-center" btn-class="w-100" theme="outlineInfo">Encontrar Partida</t-button>
         <t-errors id="find-match-errors" class="mt-2"></t-errors>
       </div>
     </div>
