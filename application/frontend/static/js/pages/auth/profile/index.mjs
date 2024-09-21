@@ -20,32 +20,32 @@ export const Profile = () => {
     <h1 class="text-center" data-bs-theme="secondary">Perfil</h1>
   </div>
   <div class="p-2 rounded mt-2">
-    <div class="d-flex justify-content-between align-items-center p-3">
-      <div class="d-flex flex-column">
-          <form id="update-form">
-            <div class="d-flex flex-wrap gap-1">
-            <t-input id="input-name" label="Nome" class="w-100"></t-input>
-            <t-errors id="update-form-errors"></t-errors>
-            <t-button id="save-button" class="d-block mt-3 w-100" btn-class="w-100">Salvar</t-button>
-            </div>
-            <div class="mt-3">
-              <strong>Email:</strong>
-              <span id="email-placeholder"></span>
-            </div>
-          </form>
-          <span><strong>Pontuação:</strong> ${session.player.stats.total_score}</span>
-          <span><strong>Tempo Jogado:</strong> ${session.player.stats.total_play_time}s</span>
-      </div>
-      <div class="d-flex flex-column gap-2 avatar-container" style="max-width: 200px">
-        <t-input-image theme="none" class="position-relative w-100 profile_avatar_edit_container">
-          <img id="avatar-preview" class="avatar" />
-          <span class="position-absolute top-50 start-50 translate-middle h-100 w-100 profile_avatar_edit_overlay"> 
-            <span class="position-absolute top-50 start-50 translate-middle">Editar</span>
-          </span>
-        </t-input-image>
-        <t-button id="avatar-save-button" class="d-block" btn-class="w-100">
-          Salvar
-        </t-button>
+  <div class="d-flex  gap-2 align-items-center profile-container p-3 row">
+    <div class="d-flex col-md-6 flex-column gap-2 avatar-container p-1 justify-content-center" style="max-width: 200px">
+      <t-input-image theme="none" class="position-relative profile_avatar_edit_container">
+        <img id="avatar-preview" class="avatar" />
+        <span class="position-absolute top-50 start-50 translate-middle h-100 w-100 profile_avatar_edit_overlay"> 
+          <span class="position-absolute top-50 start-50 translate-middle">Editar</span>
+        </span>
+      </t-input-image>
+      <t-button id="avatar-save-button" class="d-block" btn-class="w-100">
+        Salvar
+      </t-button>
+    </div>
+    <div class="d-flex  col-md-6 flex-column">
+        <form id="update-form">
+          <div class="d-flex flex-wrap gap-1">
+          <t-input id="input-name" label="Nome" class="w-100"></t-input>
+          <t-errors id="update-form-errors"></t-errors>
+          <t-button id="save-button" class="d-block mt-3 w-100" btn-class="w-100">Salvar</t-button>
+          </div>
+          <div class="mt-3">
+            <strong>Email:</strong>
+            <span id="email-placeholder"></span>
+          </div>
+        </form>
+        <span><strong>Pontuação:</strong> ${session.player.stats.total_score}</span>
+        <span><strong>Tempo Jogado:</strong> ${session.player.stats.total_play_time}s</span>
       </div>
     </div>
 
