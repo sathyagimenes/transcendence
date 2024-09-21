@@ -23,15 +23,15 @@ export const PlayerProfile = ({ params }) => {
       <h1 class="text-center">Perfil</h1>
     </div>
     <div class="d-flex flex-column p-2 rounded mt-2">
-      <div class="d-flex justify-content-between align-items-center p-2">
-        <div class="info-container">
+      <div class="d-flex align-items-center p-2 row profile-container">
+        <div class="d-flex col-md-6 flex-column gap-2 position-relative w-100 avatar-container" style="max-width: 200px">
+        <img id="avatar-preview" class="avatar p-2" />
+        </div>
+        <div class="info-container justify-content-center col-md-6">
           <h1 id="name-placeholder">Perfil</h1>
           <span id="email-placeholder" class="mt-2"></span>
           <span id="total-play-time"></span>
           <span id="total-score"></span>
-        </div>
-        <div class="d-flex flex-column gap-2 position-relative w-100 avatar-container" style="max-width: 200px">
-          <img id="avatar-preview" class="avatar" />
         </div>
       </div>
     </div>

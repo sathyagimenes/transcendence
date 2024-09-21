@@ -12,6 +12,10 @@
 	opacity: 1;
 }
 
+.profile-container {
+	justify-content: space-between;
+}
+
 .top-image img {
 	width: 100%;
 	height: auto;
@@ -34,7 +38,7 @@
 
 .avatar-container {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -47,8 +51,15 @@
 	aspect-ratio: 1 / 1;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 780px) {
 	.chat-container {
 		flex-direction: column !important;
+	}
+
+	.profile-container {
+		justify-content: center;
+	}
+	.info-container {
+		align-items: center;
 	}
 }
