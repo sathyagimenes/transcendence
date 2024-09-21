@@ -22,7 +22,7 @@ export function useTournamentHistory(page, { from_player }) {
         return new Component("div").class("card p-3").children([
           new Component("card-body").children([
             new Component("h5", { textContent: tournament.name })
-              .class("card-title d-flex justify-content-between text-break")
+              .class("card-title d-flex justify-content-between flex-wrap text-break")
               .children([
                 tournament.champion
                   ? new Component("span", {
