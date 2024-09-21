@@ -14,8 +14,8 @@ export const Chat = () => {
   <div class="d-flex flex-column p-2 rounded mt-2">
     <h1 class="text-center" data-bs-theme="secondary">Chat</h1>
   </div>
-  <div class="d-flex flex-row p-2 rounded mt-2">
-    <div class="d-flex flex-column p-2 rounded col-4">
+  <div class="d-flex flex-row p-2 rounded mt-2 chat-container row">
+    <div class="d-flex align-items-stretch flex-column p-2 rounded col-md-4">
       <div class="border border-secondary p-2 rounded">
         <strong class="mb-2 d-block">Adicionar amigo</strong>
 
@@ -26,7 +26,7 @@ export const Chat = () => {
         </form>
       </div>
 
-      <div class="border border-secondary p-2 mt-3 rounded overflow-y-auto" style="height: 60vh">
+      <div class="border border-secondary p-2 my-3 rounded overflow-y-auto" style="height: 60vh">
         <strong class="mb-2 d-block">Amigos</strong>
         <t-loading id="loading-players" loading="true">
           <ul id="players-list" class="list-group">
@@ -60,7 +60,7 @@ export const Chat = () => {
         </div>
       </div>
     </div>
-    <t-chat class="col-8 mt-2"></t-chat>
+    <t-chat class="col-md-8 mt-2"></t-chat>
   </div>
   `;
 
