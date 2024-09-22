@@ -35,9 +35,12 @@ export class PongCanvas extends HTMLElement {
   }
 
   render() {
-    const worldSize = { width: 100, height: 100 };
-    const canvasSize = this.#canvas.element.getBoundingClientRect();
+    const canvas = this.#canvas;
     const ctx = this.#ctx;
+    const worldSize = { width: 100, height: 100 };
+    const canvasSize = canvas.element.getBoundingClientRect();
+    canvas.element.width = canvasSize.width;
+    canvas.element.height = canvasSize.height;
     ctx.resetTransform();
     ctx.scale(canvasSize.width / worldSize.width, canvasSize.height / worldSize.height);
     this.clear();
