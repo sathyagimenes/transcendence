@@ -17,7 +17,7 @@ export class Modal extends HTMLElement {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "50vw",
+        width: "unset",
         zIndex: 1000,
       });
 

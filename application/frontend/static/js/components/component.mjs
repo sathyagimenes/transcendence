@@ -159,6 +159,14 @@ export function attachBootstrap(shadow) {
   );
   script.setAttribute("crossorigin", "anonymous");
 
+  const link2 = document.createElement("link");
+  link2.setAttribute("rel", "stylesheet");
+  link2.setAttribute(
+    "href",
+    "/static/css/styles.css",
+  );
+  
   shadow.appendChild(link);
+  shadow.appendChild(link2);
   shadow.appendChild(script);
 }
