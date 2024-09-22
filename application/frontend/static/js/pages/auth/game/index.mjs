@@ -111,10 +111,18 @@ export const Game = ({ params }) => {
         <section class="d-flex flex-column position-relative">
           <h1 id="match-name-title" class="text-center m-2"></h1>
           <section class="mx-auto rounded p-2">
-            <div class="gap-2 justify-content-center" style="display: grid; grid-template-columns: 7rem 1fr 7rem">
-              <div class="player-data justify-content-center" data-placement="1"></div>
-              <t-pong-canvas id="pong-canvas" class="bg-secondary rounded"></t-pong-canvas>
-              <div class="player-data justify-content-center" data-placement="2"></div>
+            <div class="box-canvas">
+            <div class="box-player-1">
+                <button id="left-button" class="btn btn-primary">←</button>
+                <div class="player-data justify-content-center" data-placement="1"></div>
+                <button id="right-button" class="btn btn-primary">→</button>
+              </div>  
+              <t-pong-canvas id="pong-canvas" class="bg-secondary rounded" style="display: flex;"></t-pong-canvas>
+              <div class="box-player-2">
+                <button id="left-button" class="btn btn-primary">←</button>
+                <div class="player-data justify-content-center" data-placement="2"></div>
+                <button id="right-button" class="btn btn-primary">→</button>
+              </div>
             </div>
           </section>
         </section>
@@ -167,14 +175,14 @@ export const Game = ({ params }) => {
           .attributes({
             src: player.avatar,
           })
-          .styles({ width: "80px", aspectRatio: 1 })
+          .styles({ aspectRatio: 1 })
           .class("object-fit-cover rounded-circle mx-auto"),
         new Component("strong", { textContent: player.name }).class(
-          "fs-4 text-center text-truncate",
+          "text-center text-truncate",
         ),
         new Component("strong", {
           textContent: player.score ? player.score : "0",
-        }).class("score fs-3 text-center"),
+        }).class("score text-center"),
       ]);
     }
     has_rendered_players = true;

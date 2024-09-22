@@ -18,6 +18,7 @@ export class PongCanvas extends HTMLElement {
   connectedCallback() {
     const shadow = this.shadowRoot || this.attachShadow({ mode: "open" });
     attachBootstrap(shadow);
+   
 
     shadow.appendChild(this.#canvas.element);
   }
@@ -39,10 +40,17 @@ export class PongCanvas extends HTMLElement {
     const ctx = this.#ctx;
     const worldSize = { width: 100, height: 100 };
     const canvasSize = canvas.element.getBoundingClientRect();
+    const TAU = 2 * Math.PI;
     canvas.element.width = canvasSize.width;
     canvas.element.height = canvasSize.height;
     ctx.resetTransform();
-    ctx.scale(canvasSize.width / worldSize.width, canvasSize.height / worldSize.height);
+    if (canvasSize.width <= 300) {
+      ctx.translate(0, canvasSize.height);
+      ctx.scale(canvasSize.width / worldSize.width, canvasSize.height / worldSize.height);
+      ctx.rotate(-TAU * 0.25);
+    } else {
+      ctx.scale(canvasSize.width / worldSize.width, canvasSize.height / worldSize.height);
+    }
     this.clear();
     for (const element of this.elements) {
       let previousFillStyle = ctx.fillStyle;
