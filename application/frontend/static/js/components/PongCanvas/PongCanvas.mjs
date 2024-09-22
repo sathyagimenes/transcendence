@@ -33,6 +33,21 @@ export class PongCanvas extends HTMLElement {
 
   clear() {
     this.#ctx.clearRect(0, 0, 100, 100);
+
+    //TO DEBUG
+
+    // this.#ctx.strokeStyle = "green";
+    // this.#ctx.strokeRect(0, 0, 100, 100);
+    // // draw a small circle on (0,0)
+    // this.#ctx.beginPath();
+    // this.#ctx.arc(0, 0, 1, 0, 2 * Math.PI);
+    // this.#ctx.fillStyle = "red";
+    // this.#ctx.fill();
+    // // draw a small circle on (100,100)
+    // this.#ctx.beginPath();
+    // this.#ctx.arc(100, 100, 1, 0, 2 * Math.PI);
+    // this.#ctx.fillStyle = "blue";
+    // this.#ctx.fill();    
   }
 
   render() {
@@ -45,9 +60,9 @@ export class PongCanvas extends HTMLElement {
     canvas.element.height = canvasSize.height;
     ctx.resetTransform();
     if (canvasSize.width <= 300) {
-      ctx.translate(0, canvasSize.height);
-      ctx.scale(canvasSize.width / worldSize.width, canvasSize.height / worldSize.height);
-      ctx.rotate(-TAU * 0.25);
+      ctx.translate(canvasSize.width, 0);
+      ctx.scale(canvasSize.height / worldSize.width, canvasSize.width / worldSize.height);
+      ctx.rotate(TAU * 0.25);
     } else {
       ctx.scale(canvasSize.width / worldSize.width, canvasSize.height / worldSize.height);
     }
