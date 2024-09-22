@@ -1,40 +1,30 @@
 import { CanvasElement } from "./CanvasElement.mjs";
 
+/**
+ * @import { Position, Size } from "../../../types.mjs";
+ */
 export class CanvasPaddle extends CanvasElement {
-  __width = 10;
-  __height = 60;
-  __color = "white";
 
   /**
-   * @param {number} width
-   * @param {number} height
+   * @param {Position} pos
+   * @param {Size} size
    */
-  constructor(width, height) {
-    super();
-    this.__width = width;
-    this.__height = height;
+  constructor(pos, size) {
+    super(pos, size);
   }
 
-  /**
-   * @param {string} color
-   */
-  color(color) {
-    this.__color = color;
-  }
   /**
    * @param {CanvasRenderingContext2D} ctx
    * @returns {this}
    */
   render(ctx) {
-    let previousFillStyle = ctx.fillStyle;
-    ctx.fillStyle = this.__color;
+    ctx.fillStyle = "white";
     ctx.fillRect(
-      this.__translated_x,
-      this.__translated_y,
-      this.__width,
-      this.__height,
+      this.pos.x,
+      this.pos.y,
+      this.size.width,
+      this.size.height,
     );
-    ctx.fillStyle = previousFillStyle;
     return this;
   }
 }

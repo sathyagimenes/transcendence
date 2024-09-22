@@ -6,15 +6,12 @@ export class PongCanvas extends HTMLElement {
   #canvas;
   /** @type {CanvasRenderingContext2D} */
   #ctx;
-  width = 500;
-  height = 500;
   /** @type {CanvasElement[]} */
   elements = [];
 
   constructor() {
     super();
     this.#canvas = new Component("canvas");
-    this.#canvas.attributes({ width: this.width, height: this.height });
     this.#ctx = this.#canvas.element.getContext("2d");
   }
 
@@ -26,41 +23,6 @@ export class PongCanvas extends HTMLElement {
   }
 
   /**
-   * Transforms VCW to pixels
-   * @param {import("./types.mjs").VCW} n
-   */
-  VCW(n) {
-    return (n / 100) * this.width;
-  }
-
-  /**
-   * Transforms VCH to pixels
-   *
-   * @param {import("./types.mjs").VCH} n
-   */
-  VCH(n) {
-    return (n / 100) * this.height;
-  }
-
-  /**
-   * Transforms pixels to VCW
-   * @param {number} n
-   * @returns {import("./types.mjs").VCW}
-   */
-  PixelsToVCW(n) {
-    return (n * 100) / this.width;
-  }
-
-  /**
-   * Transforms pixels to VCH
-   * @param {number} n
-   * @returns {import("./types.mjs").VCH}
-   */
-  PixelsToVCH(n) {
-    return (n * 100) / this.height;
-  }
-
-  /**
    * @param {CanvasElement} element
    */
   addCanvasElement(element) {
@@ -69,13 +31,22 @@ export class PongCanvas extends HTMLElement {
   }
 
   clear() {
-    this.#ctx.clearRect(0, 0, this.width, this.height);
+    this.#ctx.clearRect(0, 0, 100, 100);
   }
 
   render() {
+    const worldSize = { width: 100, height: 100 };
+    const canvasSize = this.#canvas.element.getBoundingClientRect();
+    const ctx = this.#ctx;
+    ctx.resetTransform();
+    ctx.scale(canvasSize.width / worldSize.width, canvasSize.height / worldSize.height);
     this.clear();
     for (const element of this.elements) {
-      element.render(this.#ctx);
+      let previousFillStyle = ctx.fillStyle;
+      let previousStrokeStyle = ctx.strokeStyle;
+      element.render(ctx);
+      ctx.fillStyle = previousFillStyle;
+      ctx.strokeStyle = previousStrokeStyle
     }
   }
 }
