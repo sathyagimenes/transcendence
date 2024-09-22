@@ -9,20 +9,21 @@ import { session } from "../../../state/session.mjs";
 import { NotFound } from "../../not-found/index.mjs";
 
 /**
+ * @import { Size, Position } from "../../../types.mjs";
  * @typedef {{
  *   match: import("../../../services/match.mjs").Match,
  *   game: {
  *      players: {
  *        placement: number,
- *        position: { x: number, y: number },
+ *        position: Position,
  *        id: string,
  *        name: string,
  *        is_local_player: boolean,
  *        avatar: string
- *        paddle: { size: { width: number, height: number } },
+ *        paddle: { size: Size },
  *        score: number
  *      }[],
- *      ball: { size: {width: number, height: number} ,position: { x: number, y: number} },
+ *      ball: { size: Size, position: Position },
  *      is_running: boolean
  *   },
  * }} Game
@@ -189,20 +190,10 @@ export const Game = ({ params }) => {
     page.element.querySelector("#match-name-title").textContent = match.name;
     page.element.querySelector("#loading-match").setLoading(false);
 
-    const ball = new CanvasBall(
-      canvas.VCW(game.ball.size.width),
-      canvas.VCH(game.ball.size.height),
-    )
-      .pos(canvas.VCW(game.ball.position.x), canvas.VCH(game.ball.position.y))
-      .translate(0, 0);
+    const ball = new CanvasBall(game.ball.position, game.ball.size);
 
     const players = game.players.map(({ position, paddle: p }) => {
-      const paddle = new CanvasPaddle(
-        canvas.VCW(p.size.width),
-        canvas.VCH(p.size.height),
-      ).pos(canvas.VCW(position.x), canvas.VCH(position.y));
-
-      return { paddle };
+      return { paddle: new CanvasPaddle(position, p.size) };
     });
 
     players.forEach((p) => canvas.addCanvasElement(p.paddle));
@@ -238,16 +229,10 @@ export const Game = ({ params }) => {
      */
     function onMatchUpdate({ game }) {
       players.forEach((p, i) =>
-        p.paddle.pos(
-          canvas.VCW(game.players[i].position.x),
-          canvas.VCH(game.players[i].position.y),
-        ),
+        p.paddle.pos = game.players[i].position,
       );
 
-      ball.pos(
-        canvas.VCW(game.ball.position.x),
-        canvas.VCH(game.ball.position.y),
-      );
+      ball.pos = game.ball.position;
 
       canvas.render();
 
