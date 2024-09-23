@@ -32,11 +32,59 @@ import { NotFound } from "../../not-found/index.mjs";
 /** @typedef {{ up: string, down: string, }} PlayerControlKeys */
 
 /**
- * @param {PlayerControlKeys & { onKeyPressUp: () => void, onKeyPressDown: () => void }} options
+ * @param {PlayerControlKeys & { onKeyPressUp: () => void, onKeyPressDown: () => void, 
+ *  onMouseClicking: () => void, button: HTMLElement
+ *  }} options
  */
-function onKeysPressed(options) {
+
+function onMouseClicking(options) {
+  let isClicking = false;
+  let running = true;
+
+  function handleMouseDown(event) {
+    if (event.target === options.button) {
+      isClicking = true;
+    }
+  }
+
+  function handleMouseUp(event) {
+    if (event.target === options.button) {
+      isClicking = false;
+    }
+  }
+
+  function handleMouseLeave(event) {
+    if (event.target === options.button) {
+      isClicking = false;
+    }
+  }
+
+  document.addEventListener("mousedown", handleMouseDown);
+  document.addEventListener("mouseup", handleMouseUp);
+  document.addEventListener("mouseleave", handleMouseLeave);
+
+  const onClicking = () => {
+    if (!running) return;
+    if (isClicking) {
+      options.onMouseClicking();
+    }
+    window.requestAnimationFrame(onClicking);
+  };
+
+  const animationFrame = onClicking();
+
+  return () => {
+    running = false;
+    document.removeEventListener("mousedown", handleMouseDown);
+    document.removeEventListener("mouseup", handleMouseUp);
+    document.removeEventListener("mouseleave", handleMouseLeave);
+    window.cancelAnimationFrame(animationFrame);
+  };
+}
+
+function handleKeys(options) {
   let pressedKeys = {};
-  const keys = [options.up, options.down, ];
+  const keys = [options.up, options.down,];
   let running = true;
 
   function handleKeyDown(event) {
@@ -53,7 +101,7 @@ function onKeysPressed(options) {
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
 
-  const onKeyPress = () => {
+  const onFrame = () => {
     if (!running) return;
     if (pressedKeys[options.up]) {
       options.onKeyPressUp();
@@ -62,9 +110,9 @@ function onKeysPressed(options) {
       options.onKeyPressDown();
     }
 
-    return window.requestAnimationFrame(onKeyPress);
+    return window.requestAnimationFrame(onFrame);
   };
-  const animationFrame = onKeyPress();
+  const animationFrame = onFrame();
   return () => {
     running = false;
     document.removeEventListener("keyup", handleKeyUp);
@@ -76,7 +124,7 @@ function onKeysPressed(options) {
 function setupKeyboardListenersFor(player, keys) {
   let keyPressClear;
   if (player.placement === 1 || player.placement === 2) {
-    keyPressClear = onKeysPressed({
+    keyPressClear = handleKeys({
       up: keys.up,
       down: keys.down,
       onKeyPressUp() {
@@ -96,6 +144,72 @@ function setupKeyboardListenersFor(player, keys) {
   router.addEventListener("onBeforePageChange", keyPressClear);
 }
 
+function handleButton(button, onPressed) {
+  let running = true;
+  let pressed = false;
+  function handlePress(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (pressed)
+      return;
+    pressed = true;
+    onPressed();
+  }
+
+  function handleRelease(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    pressed = false;
+  }
+
+  button.addEventListener('pointerdown', handlePress);
+  button.addEventListener('pointerup', handleRelease);
+  button.addEventListener('pointerout', handleRelease);
+  button.addEventListener('pointercancel', handleRelease);
+  button.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  const onFrame = () => {
+    if (!running) return;
+    if (pressed) {
+      onPressed();
+    }
+    return window.requestAnimationFrame(onFrame);
+  };
+  const animationFrame = onFrame();
+  return () => {
+    running = false;
+    window.cancelAnimationFrame(animationFrame);
+  };
+}
+
+function setupButtonListenersFor(player) {
+  const leftButton = document.getElementById(`left-button-${player.placement}`);
+  const rightButton = document.getElementById(`right-button-${player.placement}`);
+  if (!leftButton) {
+    console.error(`Left button for player ${player.placement} not found.`);
+    return;
+  }
+  if (!rightButton) {
+    console.error(`Right button for player ${player.placement} not found.`);
+    return;
+  }
+  const leftClear = handleButton(leftButton, () => {
+    MatchCommunication.Communication.send(
+      MatchCommunication.Commands.KEY_PRESS,
+      { direction: "DOWN", id: player.id },
+    );
+  });
+  const rightClear = handleButton(rightButton, () => {
+    MatchCommunication.Communication.send(
+      MatchCommunication.Commands.KEY_PRESS,
+      { direction: "UP", id: player.id },
+    );
+  });
+  router.addEventListener("onBeforePageChange", leftClear);
+  router.addEventListener("onBeforePageChange", rightClear);
+}
+
+
 /** @type {import("../../../router/router.mjs").Page} */
 export const Game = ({ params }) => {
   const match_id = params.match;
@@ -112,16 +226,16 @@ export const Game = ({ params }) => {
           <h1 id="match-name-title" class="text-center m-2"></h1>
           <section class="mx-auto rounded p-2">
             <div class="box-canvas">
-            <div class="box-player-1">
-                <button id="left-button" class="btn btn-primary">←</button>
+              <div class="box-player-1">
+                <button type="button" id="left-button-1" class="btn btn-primary">←</button>
                 <div class="player-data justify-content-center" data-placement="1"></div>
-                <button id="right-button" class="btn btn-primary">→</button>
+                <button type="button" id="right-button-1" class="btn btn-primary">→</button>
               </div>  
               <t-pong-canvas id="pong-canvas" class="bg-secondary rounded" style="display: flex;"></t-pong-canvas>
               <div class="box-player-2">
-                <button id="left-button" class="btn btn-primary">←</button>
+                <button type="button" id="left-button-2" class="btn btn-primary">←</button>
                 <div class="player-data justify-content-center" data-placement="2"></div>
-                <button id="right-button" class="btn btn-primary">→</button>
+                <button type="button" id="right-button-2" class="btn btn-primary">→</button>
               </div>
             </div>
           </section>
@@ -212,23 +326,27 @@ export const Game = ({ params }) => {
     renderPlayersData(game.players);
 
     game.players.forEach((p) => {
-      if (match.type == "MULTIPLAYER_LOCAL") {
-        if (p.is_local_player) 
+      if (match.type === "MULTIPLAYER_LOCAL") {
+        if (p.is_local_player) {
           setupKeyboardListenersFor(p, {
             up: "ArrowUp",
             down: "ArrowDown",
           });
-          else
-            setupKeyboardListenersFor(p, {
+        } else {
+          setupKeyboardListenersFor(p, {
             up: "w",
-            down: "s"
+            down: "s",
           });
-      }
-      else if (p.id === session.player.id)
+        }
+      } else if (p.id === session.player.id) {
         setupKeyboardListenersFor(p, {
           up: "ArrowUp",
-          down: "ArrowDown"
+          down: "ArrowDown",
         });
+      }
+
+      // Adicione os listeners dos botões
+      setupButtonListenersFor(p);
     });
 
     let start = 0;
@@ -256,6 +374,7 @@ export const Game = ({ params }) => {
     );
     has_started_running = true;
   }
+
 
   /**
    * @param {{tournament: import("../../../services/tournament.mjs").Tournament}} param0
