@@ -127,7 +127,9 @@ t-pong-canvas {
 }
 
 /* @Media for ipadPro */
-@media ((min-width: 1024px) and (min-height: 1366px)) or  ((min-width: 820px) and (min-height: 1180px)) {
+@media ((min-width: 1024px) and (min-height: 1366px)) or ((min-width: 820px) and (min-height: 1180px)) or 
+((min-width: 768px) and (min-height: 1024px))
+{
 	t-pong-canvas {
 		width: 501px;
 		height: 501px;
@@ -140,8 +142,8 @@ t-pong-canvas {
 		align-items: center;
 	}
 	.box-canvas img{
-		width: 10rem;
-		height: 10rem;
+		width: 7.3rem;
+		height: 7.3rem;
 	}
 	.box-canvas strong{
 		font-size: 2rem;
@@ -184,13 +186,8 @@ t-pong-canvas {
 	.box-canvas strong{
 		font-size: 2.5rem;
 	}
-	.box-player-1, .box-player-2 {
-		flex-direction: column;
-		margin-left: 15px;
-		margin-right: 15px;
-		align-items: center;
-		:nth-child(1){
-			margin-bottom: 20px;
-		}	
-	}
+	.box-player-1 button, .box-player-2 button{
+        display: none;
+    }	
 }
+
