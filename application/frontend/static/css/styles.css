@@ -82,8 +82,8 @@ canvas {
 }
 
 t-pong-canvas {
-	width: 200px;
-	height: 200px;
+	width: 300px;
+	height: 300px;
 	margin-bottom: 10px;
 }
 .box-player-1,.box-player-2{
@@ -98,8 +98,8 @@ t-pong-canvas {
 	
 
 	t-pong-canvas {
-		width: 300px;
-		height: 300px;
+		width: 430px;
+		height: 430px;
 		margin-bottom: 10px;
 	}
 	
@@ -107,50 +107,28 @@ t-pong-canvas {
 
 @media (min-width: 780px) {
 	t-pong-canvas {
-		width: 400px;
-		height: 400px;
-		margin-bottom: 10px;
-	}
-	.box-canvas {
-		display: flex;
-		flex-direction: row;
-		gap: 15px;
-		align-items: center;
-	}
-	.box-canvas img{
-		width: 7rem;
-		height: 7rem;
-	}
-	.box-canvas strong{
-		font-size: 1.5rem;
-	}
-	.box-player-1 button, .box-player-2 button{
-		display: none;
-	}
-}
-
-@media (min-width: 1024px) {
-	t-pong-canvas {
 		width: 500px;
 		height: 500px;
 		margin-bottom: 10px;
 	}
-	.box-canvas img{
-		width: 10rem;
-		height: 10rem;
+	.box-canvas{
+	flex-direction: row;
 	}
-	.box-canvas strong{
-		font-size: 2rem;
-	}
-	.box-player-1 button, .box-player-2 button{
-		display: none;
+	.box-player-1, .box-player-2{
+		flex-direction: column;
+		margin-left: 15px;
+		margin-right: 15px;
+		:nth-child(1){
+			margin-bottom: 10px;
+		}	
 	}
 }
 
+
 @media (min-width: 1200px) {
 	t-pong-canvas {
-		width: 800px;
-		height: 800px;
+		width: 700px;
+		height: 700px;
 		margin-bottom: 10px;
 	}
 	.box-canvas img{
@@ -160,7 +138,13 @@ t-pong-canvas {
 	.box-canvas strong{
 		font-size: 2.5rem;
 	}
-	.box-player-1 button, .box-player-2 button{
-		display: none;
+	.box-player-1, .box-player-2 {
+		flex-direction: column;
+		margin-left: 15px;
+		margin-right: 15px;
+		align-items: center;
+		:nth-child(1){
+			margin-bottom: 20px;
+		}	
 	}
 }
