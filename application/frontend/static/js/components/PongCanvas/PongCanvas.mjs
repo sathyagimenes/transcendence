@@ -59,7 +59,7 @@ export class PongCanvas extends HTMLElement {
     canvas.element.width = canvasSize.width;
     canvas.element.height = canvasSize.height;
     ctx.resetTransform();
-    if (canvasSize.width <= 300) {
+    if (canvasSize.width <= 300 || (canvasSize.width == 501 && canvasSize.height == 501)) {
       ctx.translate(canvasSize.width, 0);
       ctx.scale(canvasSize.height / worldSize.width, canvasSize.width / worldSize.height);
       ctx.rotate(TAU * 0.25);
