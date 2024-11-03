@@ -234,8 +234,10 @@ export const Game = ({ params }) => {
               <t-pong-canvas id="pong-canvas" class="bg-secondary rounded" style="display: flex;"></t-pong-canvas>
               <div class="box-player-2">
                 <button type="button" id="left-button-2" class="btn btn-primary">←</button>
+                
                 <div class="player-data justify-content-center" data-placement="2"></div>
                 <button type="button" id="right-button-2" class="btn btn-primary">→</button>
+                
               </div>
             </div>
           </section>
