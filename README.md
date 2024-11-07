@@ -14,5 +14,6 @@ Django | Python | Javascript | PostgreSQL | Docker
 ## Usage
 - Clone the repository into a local folder: ```git clone```  ```https://github.com/sathyagimenes/transcendence.git```
 - Rename the file `.env.example` to `.env`
+- Run Docker
 - In the root folder of the project, run the following command: ```make```
-- The application will be available at `http://localhost:8000`
+- The application will be available at `http://localhost:443`
